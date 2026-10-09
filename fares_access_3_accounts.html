@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a1020">
+<title>FARES ACCESS | Password Challenge</title>
+<style>
+:root{color-scheme:dark;--bg:#080d19;--panel:#101a2c;--line:#26354c;--muted:#92a2bb;--text:#f4f7ff;--accent:#78e4d3;--accent2:#8d9cff;--bad:#ff8295}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(ellipse at 15% 10%,#18364a 0,transparent 36%),radial-gradient(ellipse at 90% 85%,#24244b 0,transparent 36%),var(--bg);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;color:var(--text)}
+.shell{width:min(100%,430px)}.top{display:flex;align-items:center;gap:13px;margin:0 0 20px}.mark{width:48px;height:48px;display:grid;place-items:center;border:1px solid #3d6872;border-radius:15px;background:linear-gradient(145deg,#173946,#19233f);color:var(--accent);font-size:24px;font-weight:800;box-shadow:0 0 30px #5bdcc51a}.brand{font-size:15px;font-weight:850;letter-spacing:2px;direction:ltr;text-align:right}.subbrand{margin-top:3px;color:var(--muted);font-size:12px;letter-spacing:.3px;direction:ltr;text-align:right}
+.card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:23px;padding:27px;background:linear-gradient(160deg,#121d30f7,#0d1525f7);box-shadow:0 28px 80px #0007}.card:before{content:"";position:absolute;top:0;right:26px;width:70px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--accent);direction:ltr;text-align:right;font-weight:750}.title{font-size:26px;margin:12px 0 7px;font-weight:800;letter-spacing:-.5px}.desc{margin:0 0 25px;color:var(--muted);font-size:13px;line-height:1.9}.field-label{display:block;margin:0 0 9px;font-size:13px;color:#d7e0ef}.input-wrap{position:relative}.input{width:100%;height:54px;padding:0 15px;border:1px solid #30415a;border-radius:13px;background:#080f1d;color:#fff;outline:none;font-size:16px;direction:ltr;text-align:left;transition:border .2s,box-shadow .2s}.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #78e4d31c}.input:disabled{opacity:.55}.btn{width:100%;height:52px;border:0;border-radius:13px;margin-top:15px;background:linear-gradient(100deg,#78e4d3,#8be9d2);color:#07151c;font-weight:850;font-size:15px;cursor:pointer;transition:transform .15s,filter .15s}.btn:hover{filter:brightness(1.04)}.btn:active{transform:scale(.99)}.btn:disabled{cursor:not-allowed;opacity:.55}.status{min-height:25px;margin-top:14px;font-size:13px;line-height:1.7;text-align:center;color:var(--muted)}.status.bad{color:var(--bad)}.status.good{color:var(--accent)}.minirow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px;padding-top:17px;border-top:1px solid #26354c;color:var(--muted);font-size:11px}.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid #274d4c;border-radius:99px;color:#a3eee1;font-size:10px;white-space:nowrap}.dot{width:6px;height:6px;background:var(--accent);border-radius:50%;box-shadow:0 0 9px var(--accent)}.foot{text-align:center;color:#74829a;font-size:11px;margin-top:16px;line-height:1.8}.foot b{color:#aebbd0;font-weight:650}.hidden{display:none!important}@media(max-width:400px){.card{padding:22px}.title{font-size:23px}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="top">
+    <div class="mark" aria-hidden="true">F</div>
+    <div><div class="brand">FARES ACCESS</div><div class="subbrand">PRIVATE PASSWORD CHALLENGE</div></div>
+  </header>
+  <section class="card" aria-labelledby="title">
+    <div class="eyebrow">AUTHENTICATION GATE / 01</div>
+    <h1 class="title" id="title">تسجيل الدخول</h1>
+    <p class="desc">أدخل اسم المستخدم وكلمة المرور للمتابعة. لا توجد تلميحات في هذه المرحلة.</p>
+    <form id="loginForm" autocomplete="off">
+      <label class="field-label" for="username">اسم المستخدم</label>
+      <input class="input" id="username" name="username" type="text" placeholder="Enter username" required spellcheck="false" autocomplete="off" aria-label="اسم المستخدم">
+      <label class="field-label" for="password" style="margin-top:17px">كلمة المرور</label>
+      <input class="input" id="password" name="password" type="password" placeholder="Enter password" required autocomplete="new-password" spellcheck="false" aria-label="كلمة المرور">
+      <button class="btn" id="submitBtn" type="submit">تحقق من بيانات الدخول <span aria-hidden="true">←</span></button>
+      <div class="status" id="status" role="status" aria-live="polite">أدخل بيانات الدخول للبدء.</div>
+    </form>
+    <div class="minirow"><span>FARES GAMAL · ACCESS LAB</span><span class="pill"><i class="dot"></i> OFFLINE MODE</span></div>
+  </section>
+  <footer class="foot">هذا تحدٍّ محلي للتعلّم فقط.<br><b>لا يتم إرسال المدخلات إلى أي خادم.</b></footer>
+</main>
+<script>
+(()=>{'use strict';
+const ITERATIONS=310000, MAX_TRIES=8, LOCK_MS=45000;
+const ACCOUNTS={'mohamed':{salt:'cf8c347d7f0f3c887c25658d3703dff7',verifier:'665d2b23396052ec607816f24548e68b947fc34a7a20978e69f3b29e04bbe311'}, 'ahmed':{salt:'381d18729c05ae59df7fe66c6e105864',verifier:'046e75b7f217d9c05f723ac5e373fd78e29628719469cde29bc707afa804dec2'}, 'fares':{salt:'fb008efebd3bb6472e2c635620eaaa14',verifier:'ec7b1afaefdb75f434a3e79f9db0e2d708706089d4bfb8c6c7d021a2cd9de2c9'}};
+const DUMMY={salt:'fb17c3928f851c7dc0583329ca9a14ec',verifier:'6ade79baf660e9f85d5f9de1ff3e293dde0f0be11e70a9dfcd7219282c585ec9'};
+const form=document.getElementById('loginForm'), user=document.getElementById('username'), pass=document.getElementById('password'), btn=document.getElementById('submitBtn'), status=document.getElementById('status');
+let attempts=0, lockedUntil=0, busy=false, passed=false;
+const hexToBytes=h=>new Uint8Array(h.match(/.{1,2}/g).map(x=>parseInt(x,16)));
+const toHex=b=>Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,'0')).join('');
+function message(text,type=''){status.textContent=text;status.className='status'+(type?' '+type:'')}
+function lockTick(){const left=lockedUntil-Date.now();if(left<=0){lockedUntil=0;attempts=0;pass.disabled=false;user.disabled=false;btn.disabled=false;message('يمكنك المحاولة مرة أخرى.');return}pass.disabled=true;user.disabled=true;btn.disabled=true;message('تم إيقاف المحاولات مؤقتًا. انتظر '+Math.ceil(left/1000)+' ثانية.','bad');setTimeout(lockTick,500)}
+async function verify(candidate,record){if(!window.crypto?.subtle)throw new Error('unsupported');const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(candidate),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:hexToBytes(record.salt),iterations:ITERATIONS,hash:'SHA-256'},key,256);return toHex(bits)===record.verifier}
+form.addEventListener('submit',async e=>{e.preventDefault();if(busy||passed||lockedUntil>Date.now())return;const candidate=pass.value, username=user.value.trim().toLowerCase();if(!username||!candidate){message('أدخل اسم المستخدم وكلمة المرور.','bad');return}busy=true;btn.disabled=true;pass.disabled=true;user.disabled=true;message('جارٍ التحقق…');try{const record=Object.prototype.hasOwnProperty.call(ACCOUNTS,username)?ACCOUNTS[username]:DUMMY;const match=await verify(candidate,record);if(match&&Object.prototype.hasOwnProperty.call(ACCOUNTS,username)){passed=true;message('تم قبول بيانات الدخول. نجحت في التحدّي.','good');btn.textContent='تم التحقق ✓';pass.value='';user.disabled=true;return}else{attempts++;pass.value='';if(attempts>=MAX_TRIES){lockedUntil=Date.now()+LOCK_MS;lockTick()}else message('اسم المستخدم أو كلمة المرور غير صحيحة.','bad')}}catch(err){message('تعذّر تشغيل التحقق المشفّر. افتح الملف بمتصفح Chrome محدّث.','bad')}finally{busy=false;if(!passed&&(!lockedUntil||lockedUntil<=Date.now())){btn.disabled=false;pass.disabled=false;user.disabled=false;pass.focus()}}});
+})();
+</script>
+</body>
+</html>
